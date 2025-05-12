@@ -14,6 +14,12 @@ type Parser struct {
 	NumberOfArgumentsParsed int
 }
 
+var (
+
+	// CRLF is the line separator of redis serialization protocol
+	CRLF = "\r\n"
+)
+
 // Parse converts an incoming byte string into usable command with it's args
 func Parse(command []byte) string {
 	var cmd string
@@ -88,12 +94,14 @@ func ParseCommand(command string, args []string) string {
 	switch cmd {
 	case "PING":
 		return PerformPong(args)
-	case "SET":
-		return PerformSet(args)
-	case "SETEX":
-		return PerformSetEx(args)
+	//case "SET":
+	//	return PerformSet(args)
+	//case "SETEX":
+	//	return PerformSetEx(args)
 	case "GET":
 		return PerformGet(args)
+	case "SCAN":
+		return PerformScan(args)
 	default:
 		return errorMsg(fmt.Sprintf("unknown command '%s'", cmd))
 	}

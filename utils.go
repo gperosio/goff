@@ -1,20 +1,52 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
+
+func getenv(key, fallback string) string {
+	value := os.Getenv(key)
+	if len(value) == 0 {
+		return fallback
+	}
+	return value
+}
 
 // errorMsg returns a formatted string error message
 func errorMsg(msg string) string {
 	return fmt.Sprintf("-ERR %s", msg)
 }
 
+func jsonMsg(val any) string {
+	msg, err := json.Marshal(val)
+
+	if err != nil {
+		return nilBulkStringMsg()
+	}
+	return "+" + string(msg)
+}
+
+func arrayMsg(lines []string) string {
+	var out string
+	out = "*" + strconv.Itoa(len(lines)) + CRLF
+	for _, l := range lines {
+		out += "$" + strconv.Itoa(len(l)) + CRLF + l + CRLF
+	}
+	return out
+}
+
 // stringMsg returns a formatted string message
 func stringMsg(msg string) string {
-	return "+" + msg
+	return "+" + string(msg)
+}
+
+func intMsg(val int) string {
+	return ":" + strconv.Itoa(val)
 }
 
 // nilBulkStringMsg returns a nil bulk string Msg

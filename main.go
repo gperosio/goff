@@ -3,12 +3,11 @@ package main
 import (
 	"fmt"
 	"io"
-
 	"net"
 	"os"
-)
 
-const addr = "0.0.0.0:6399"
+	"github.com/joho/godotenv"
+)
 
 var banner = `
                 ________
@@ -21,13 +20,33 @@ var banner = `
 `
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+		os.Exit(1)
+	}
+
+	addr := "0.0.0.0:" + getenv("PORT", "6382")
 	l, err := net.Listen("tcp", addr)
 	if err != nil {
 		fmt.Printf("Failed to bind to %s\n", addr)
 		os.Exit(1)
 	}
+
 	fmt.Print(banner)
 	fmt.Printf("Starting Goff server at %s\n", addr)
+
+	CreateDS(getenv("STORAGE", "file"), getenv("ST_DB", "data"), getenv("ST_TBL", "features"))
+
+	/*
+		go func() {
+			for {
+				//leer mayor a fecha_ultima sino todo
+				// si resultado, hacer cambio
+				//actualizar fecha ultima
+			}
+		}()
+	*/
 	// Listen for inputs and respond
 	for {
 		conn, err := l.Accept()
