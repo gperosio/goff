@@ -100,6 +100,8 @@ func ParseCommand(command string, args []string) string {
 	//	return PerformSetEx(args)
 	case "GET":
 		return PerformGet(args)
+	case "HGET":
+		return PerformJsonGet(args)
 	case "SCAN":
 		return PerformScan(args)
 	default:

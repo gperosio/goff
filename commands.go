@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const MAX_LEVEL_RECURSION = 10
+
 // PerformPong response pack with "PONG", or optionally a passed in argument
 func PerformPong(args []string) string {
 	if len(args) > 0 {
@@ -20,24 +22,49 @@ func PerformGet(args []string) string {
 	}
 
 	//buscar llave principal
-	parts := strings.Split(args[0], ".")
-	item := store[parts[0]]
+	item := store[args[0]]
 
 	// Check if it's null
 	if item == nil {
 		return nilBulkStringMsg()
 	}
 
-	val := findKey(item, parts[1:])
-	if val == nil {
-		return nilBulkStringMsg()
-	}
 	// Check the expiry
 	//now := time.Now()
 	//if !item.Expiry.IsZero() && item.Expiry.Before(now) {
 	//	store[args[0]] = nil
 	//	return nilBulkStringMsg()
 	//}
+
+	return jsonMsg(item.Value)
+}
+
+func PerformJsonGet(args []string) string {
+	if len(args) == 0 {
+		return errorMsg("no value provided to 'HGET'")
+	}
+
+	if len(args) < 2 {
+		return errorMsg("no field provided to 'HGET'")
+	}
+
+	//buscar llave principal
+	item := store[args[0]]
+	parts := strings.Split(args[1], ".")
+
+	// Check if it's null
+	if item == nil {
+		return nilBulkStringMsg()
+	}
+
+	if len(parts) > MAX_LEVEL_RECURSION {
+		return errorMsg("depth level is higher, max " + strconv.Itoa(MAX_LEVEL_RECURSION))
+	}
+
+	val := findKey(item, parts)
+	if val == nil {
+		return nilBulkStringMsg()
+	}
 
 	return jsonMsg(val)
 }

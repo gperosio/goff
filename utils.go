@@ -24,11 +24,10 @@ func errorMsg(msg string) string {
 
 func jsonMsg(val any) string {
 	msg, err := json.Marshal(val)
-
 	if err != nil {
 		return nilBulkStringMsg()
 	}
-	return "+" + string(msg)
+	return stringMsg(string(msg[:]))
 }
 
 func arrayMsg(lines []string) string {
@@ -37,11 +36,13 @@ func arrayMsg(lines []string) string {
 	for _, l := range lines {
 		out += "$" + strconv.Itoa(len(l)) + CRLF + l + CRLF
 	}
-	return out
+	n := len(out)
+	return out[:n-2]
 }
 
 // stringMsg returns a formatted string message
 func stringMsg(msg string) string {
+	fmt.Println("+" + string(msg))
 	return "+" + string(msg)
 }
 

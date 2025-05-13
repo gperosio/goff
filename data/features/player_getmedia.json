@@ -1,0 +1,302 @@
+{
+    "player": {
+        "playergetmedia": {
+            "tick_interval": "60",
+            "tick_retries": "999",
+            "force_ppe_clear": {
+                "744465": {
+                    "hls_clear": "http://liveeventch01-hlskr.clarovideo.com/Content/7u5st35t04/Live/Channel(livesportevent02)/index.m3u8",
+                    "ss_clear": "http://liveeventch01-ssfix.clarovideo.com/Content/7u5st35t04a/Live/Channel(livesportevent02).isml/Manifest",
+                    "dash_clear": "http://liveeventch01-dashfix.clarovideo.com/Content/7u5st35t04b/Live/Channel(livesportevent02)/manifest.mpd"
+                },
+                "enabled": false
+            }
+        },
+        "est": {
+            "bitrate": {
+                "sd": 1800000,
+                "hd": 2524000
+            },
+            "server_url": "http://playreadyest.clarovideo.net/rightsmanager.asmx",
+            "dashwv_server_url": "https://widevine-vod.clarovideo.net/licenser/getlicense",
+            "content_play_url": "{@protocol}www.clarovideo.com/{@regionname}/vcard/{@group_id}",
+            "content_renew_url": "{@protocol}www.clarovideo.com/{@regionname}/vcard/{@group_id}"
+        },
+        "media": {
+            "default": {
+                "fairplay": {
+                    "licenser_endpoint_vod": "https://fairplay{{PARTITION}}.clarovideo.net/ksm/getckc",
+                    "licenser_endpoint_live": "https://fairplay{{PARTITION}}.clarovideo.net/ksm/getckc",
+                    "certificate_url": "https://fairplay{{PARTITION}}.clarovideo.net/ksm/getcertificate"
+                },
+                "prm": {
+                    "licenser_endpoint_vod": "https://nagra{{PARTITION}}.clarovideo.net/Authorization/signalKey",
+                    "licenser_endpoint_live": "https://nagra{{PARTITION}}.clarovideo.net/Authorization/signalKey"
+                },
+                "hls": {
+                    "variant_playlist_host_vod": "https://securehls{{PARTITION}}-vod01.clarovideo.net/v2/gl/playlist/variant.m3u8/legacy_mode/false",
+                    "quality_playlist_host_vod": "https://securehls{{PARTITION}}-vod01.clarovideo.net/v2/gl/playlist/quality.m3u8/legacy_mode/false",
+                    "key_host_vod": "https://securehls{{PARTITION}}-vod01.clarovideo.net/v2/media/playlist/key.aes/legacy_mode/false",
+                    "variant_playlist_host_live": "https://securehls{{PARTITION}}-live01.clarovideo.net/v2/gl/playlist/variant.m3u8/legacy_mode/false",
+                    "quality_playlist_host_live": "https://securehls{{PARTITION}}-live01.clarovideo.net/v2/gl/playlist/quality.m3u8/legacy_mode/false",
+                    "key_host_live": "https://securehls{{PARTITION}}-live01.clarovideo.net/v2/media/playlist/key.aes/legacy_mode/false",
+                    "use_access_token_vod": false,
+                    "use_access_token_live": true,
+                    "excludes_access_token_live": [],
+                    "access_token_key": "ae834f5dde69cd965f674606be7cd683",
+                    "video_endpoint": {
+                        "default": "https://mxusphls2.clarovideo.com/multimediav81",
+                        "mexico": "https://mxusphls2.clarovideo.com/multimediav81",
+                        "brasil": "https://brclarovideo.akamaized.net/multimediav81",
+                        "argentina": "https://arclarovideo.akamaized.net/multimediav81",
+                        "chile": "https://clclarovideo.akamaized.net/multimediav81",
+                        "uruguay": "https://uyclarovideo.akamaized.net/multimediav81",
+                        "paraguay": "https://pyclarovideo.akamaized.net/multimediav81",
+                        "peru": "https://peusphls.clarovideo.com/multimediav81",
+                        "ecuador": "https://ecusphls.clarovideo.com/multimediav81",
+                        "colombia": "https://cousphls2.clarovideo.com/multimediav81",
+                        "panama": "https://pausphls2.clarovideo.com/multimediav81",
+                        "costarica": "https://crusphls.clarovideo.com/multimediav81",
+                        "elsalvador": "https://svusphls.clarovideo.com/multimediav81",
+                        "nicaragua": "https://niusphls.clarovideo.com/multimediav81",
+                        "dominicana": "https://dousphls.clarovideo.com/multimediav81",
+                        "guatemala": "https://gtusphls.clarovideo.com/multimediav81",
+                        "honduras": "https://hnusphls.clarovideo.com/multimediav81",
+                        "puertorico": "https://prclarovideo.akamaized.net/multimediav81",
+                        "demoeng": "https://prclarovideo.akamaized.net/multimediav81",
+                        "recordings_origin_harmonics": "http://{provider}-packager-{region}.clarovideo.net",
+                        "recordings_origin_capture": "https://captureclarovideo-vod.akamaized.net",
+                        "recordings_origin_nagra": "http://tstv.lcdn.claro.net.co",
+                        "recordings_origin_atemebppe": "https://pelivechannelshls-lab.clarovideo.com",
+                        "recordings_origin_atemebpcl": "https://cllivechannelshls-4.clarovideo.com",
+                        "recordings_origin_vos360ar": "https://arvoststvhls.clarovideo.com",
+                        "recordings_origin_vos360co": "https://covoststvhls.clarovideo.com",
+                        "recordings_origin_vos360cr": "https://crtstvhls.clarovideo.com",
+                        "recordings_origin_vos360sv": "https://svtstvhls.clarovideo.com",
+                        "recordings_origin_vos360gt": "https://gttstvhls.clarovideo.com",
+                        "recordings_origin_vos360hn": "https://hntstvhls.clarovideo.com",
+                        "recordings_origin_vos360ni": "https://nitstvhls.clarovideo.com",
+                        "recordings_origin_vos360pa": "https://pavoststvhls.clarovideo.com"
+                    }
+                },
+                "hlsfps": {
+                    "variant_playlist_host_live": "https://securehls{{PARTITION}}-live02.clarovideo.net/v2/gl/playlist/variant.m3u8/legacy_mode/false",
+                    "quality_playlist_host_live": "https://securehls{{PARTITION}}-live02.clarovideo.net/v2/gl/playlist/quality.m3u8/legacy_mode/fals",
+                    "key_host_live": "https://securehls{{PARTITION}}-live02.clarovideo.net/v2/media/playlist/key.aes/legacy_mode/false"
+                },
+                "hlsnagra": {
+                    "video_endpoint_live": "http://tstv.lcdn.claro.net.co/Content/hls_nagra/{MODE}/Channel({CHANNEL_DATA})/index.m3u8",
+                    "video_endpoint_npvr": "http://tstv.lcdn.claro.net.co",
+                    "urlTokenCASN": "https://enigma.cable.net.co/hue-gateway/gateway/http/js/signonService/signonByCASN?arg0="
+                },
+                "playready": {
+                    "licenser_endpoint_vod": "https://playready{{PARTITION}}-vod-lb.clarovideo.net/rightsmanager.asmx",
+                    "licenser_endpoint_live": "https://playready{{PARTITION}}-vod-lb.clarovideo.net/rightsmanager.asmx"
+                },
+                "smooth_streaming": {
+                    "video_endpoint": {
+                        "default": "http://mxuspss2qro.clarovideo.com/multimediav81",
+                        "mexico": "http://mxuspss2qro.clarovideo.com/multimediav81",
+                        "brasil": "http://brclarovideo.akamaized.net/multimediav81",
+                        "argentina": "http://arclarovideo.akamaized.net/multimediav81",
+                        "chile": "http://clclarovideo.akamaized.net/multimediav81",
+                        "uruguay": "http://uyclarovideo.akamaized.net/multimediav81",
+                        "peru": "http://peuspss.clarovideo.com/multimediav81",
+                        "paraguay": "http://pyclarovideo.akamaized.net/multimediav81",
+                        "ecuador": "http://ecuspss.clarovideo.com/multimediav81",
+                        "colombia": "http://couspss2.clarovideo.com/multimediav81",
+                        "panama": "http://pauspss2.clarovideo.com/multimediav81",
+                        "costarica": "http://cruspss.clarovideo.com/multimediav81",
+                        "honduras": "http://hnuspss.clarovideo.com/multimediav81",
+                        "dominicana": "http://douspss.clarovideo.com/multimediav81",
+                        "elsalvador": "http://svuspss.clarovideo.com/multimediav81",
+                        "nicaragua": "http://niuspss.clarovideo.com/multimediav81",
+                        "guatemala": "http://gtuspss.clarovideo.com/multimediav81",
+                        "puertorico": "http://prclarovideo.akamaized.net/multimediav81",
+                        "demoeng": "http://prclarovideo.akamaized.net/multimediav81",
+                        "recordings_origin_harmonics": "http://{provider}-packager-{region}.clarovideo.net",
+                        "recordings_origin_capture": "http://captureclarovideo-vod.akamaized.net",
+                        "recordings_origin_nagra": "http://tstv.lcdn.claro.net.co",
+                        "recordings_origin_atemebppe": "http://pelivechannelsss-lab.clarovideo.com",
+                        "recordings_origin_atemebpcl": "http://cllivechannelsss-4.clarovideo.com",
+                        "recordings_origin_vos360ar": "http://arvoststvss.clarovideo.com",
+                        "recordings_origin_vos360co": "http://covoststvss.clarovideo.com",
+                        "recordings_origin_vos360cr": "http://crtstvss.clarovideo.com",
+                        "recordings_origin_vos360sv": "http://svtstvss.clarovideo.com",
+                        "recordings_origin_vos360gt": "http://gttstvss.clarovideo.com",
+                        "recordings_origin_vos360hn": "http://hntstvss.clarovideo.com",
+                        "recordings_origin_vos360ni": "http://nitstvss.clarovideo.com",
+                        "recordings_origin_vos360pa": "http://pavoststvss.clarovideo.com"
+                    },
+                    "video_endpoint_live": {
+                        "default": "http://mxuspss2qro.clarovideo.com/multimediav81",
+                        "mexico": "http://mxuspss2qro.clarovideo.com/multimediav81",
+                        "brasil": "http://brclarovideo.akamaized.net/multimediav81",
+                        "argentina": "http://arclarovideo.akamaized.net/multimediav81",
+                        "chile": "http://clclarovideo.akamaized.net/multimediav81",
+                        "uruguay": "http://uyclarovideo.akamaized.net/multimediav81",
+                        "peru": "http://peuspss.clarovideo.com/multimediav81",
+                        "paraguay": "http://pyclarovideo.akamaized.net/multimediav81",
+                        "ecuador": "http://ecuspss.clarovideo.com/multimediav81",
+                        "colombia": "http://couspss2.clarovideo.com/multimediav81",
+                        "panama": "http://pauspss2.clarovideo.com/multimediav81",
+                        "costarica": "http://cruspss.clarovideo.com/multimediav81",
+                        "honduras": "http://hnuspss.clarovideo.com/multimediav81",
+                        "dominicana": "http://douspss.clarovideo.com/multimediav81",
+                        "elsalvador": "http://svuspss.clarovideo.com/multimediav81",
+                        "nicaragua": "http://niuspss.clarovideo.com/multimediav81",
+                        "guatemala": "http://gtuspss.clarovideo.com/multimediav81",
+                        "puertorico": "http://prclarovideo.akamaized.net/multimediav81",
+                        "demoeng": "http://prclarovideo.akamaized.net/multimediav81",
+                        "recordings_origin_harmonics": "http://{provider}-packager-{region}.clarovideo.net",
+                        "recordings_origin_capture": "https://captureclarovideo-vod.akamaized.net",
+                        "recordings_origin_nagra": "http://tstv.lcdn.claro.net.co",
+                        "recordings_origin_atemebppe": "http://pelivechannelsss-lab.clarovideo.com",
+                        "recordings_origin_atemebpcl": "http://cllivechannelsss-4.clarovideo.com",
+                        "recordings_origin_vos360ar": "http://arvoststvss.clarovideo.com",
+                        "recordings_origin_vos360co": "http://covoststvss.clarovideo.com",
+                        "recordings_origin_vos360cr": "http://crtstvss.clarovideo.com",
+                        "recordings_origin_vos360sv": "http://svtstvss.clarovideo.com",
+                        "recordings_origin_vos360gt": "http://gttstvss.clarovideo.com",
+                        "recordings_origin_vos360hn": "http://hntstvss.clarovideo.com",
+                        "recordings_origin_vos360ni": "http://nitstvss.clarovideo.com",
+                        "recordings_origin_vos360pa": "http://pavoststvss.clarovideo.com"
+                    }
+                },
+                "est": {
+                    "video_endpoint": {
+                        "default": "http://mxest.clarovideo.com/multimediav81",
+                        "mexico": "http://mxest.clarovideo.com/multimediav81",
+                        "brasil": "http://brest.clarovideo.com/multimediav81",
+                        "argentina": "http://arest.clarovideo.com/multimediav81",
+                        "chile": "http://clest.clarovideo.com/multimediav81",
+                        "uruguay": "http://uyest.clarovideo.com/multimediav81",
+                        "peru": "http://peest.clarovideo.com/multimediav81",
+                        "paraguay": "http://pyest.clarovideo.com/multimediav81",
+                        "ecuador": "http://ecest.clarovideo.com/multimediav81",
+                        "colombia": "http://coest.clarovideo.com/multimediav81",
+                        "panama": "http://paest.clarovideo.com/multimediav81",
+                        "costarica": "http://crest.clarovideo.com/multimediav81",
+                        "honduras": "http://hnest.clarovideo.com/multimediav81",
+                        "dominicana": "http://doest.clarovideo.com/multimediav81",
+                        "elsalvador": "http://svest.clarovideo.com/multimediav81",
+                        "nicaragua": "http://niest.clarovideo.com/multimediav81",
+                        "guatemala": "http://gtest.clarovideo.com/multimediav81",
+                        "puertorico": "http://prest.clarovideo.com/multimediav81",
+                        "demoeng": "http://prest.clarovideo.com/multimediav81"
+                    }
+                },
+                "widevine": {
+                    "licenser_endpoint_vod": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getlicense",
+                    "licenser_endpoint_live": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getlicense",
+                    "certificate_url": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getcertificate"
+                },
+                "widevine2": {
+                    "licenser_endpoint_vod": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getlicense",
+                    "licenser_endpoint_live": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getlicense",
+                    "certificate_url": "https://widevine{{PARTITION}}-vod.clarovideo.net/v2/licenser/getcertificate"
+                },
+                "widevine3": {
+                    "licenser_endpoint_vod": "https://widevine{{PARTITION}}-vod.clarovideo.net/v3/licenser/getlicense",
+                    "licenser_endpoint_live": "https://widevine{{PARTITION}}-vod.clarovideo.net/v3/licenser/getlicense",
+                    "certificate_url": "https://widevine{{PARTITION}}-vod.clarovideo.net/v3/licenser/getcertificate"
+                },
+                "claroTVMais": {
+                    "video_url": {
+                        "prod": "https://getcdn.nowonline.com.br",
+                        "uat": "https://getcdnlab.clarocdn.com.br",
+                        "preuat": "https://getcdnlab.clarocdn.com.br"
+                    },
+                    "server_url": {
+                        "widevine": "https://multidrm.core.verimatrixcloud.net/widevine",
+                        "fairplay": "https://multidrm.core.verimatrixcloud.net/fairplay"
+                    },
+                    "certificate_url": {
+                        "fairplay": {
+                            "prod": "https://www.clarotvmais.com.br/static/fairplay.der",
+                            "uat": "https://bruce.nowonlinedev.clarobrasil.mobi/static-files/fairplay.der"
+                        }
+                    },
+                    "token": {
+                        "expiration": 900
+                    }
+                },
+                "dash": {
+                    "use_access_token_vod": false,
+                    "use_access_token_live": true,
+                    "excludes_access_token_live": [],
+                    "video_endpoint": {
+                        "mexico": "https://mxuspdashqro.clarovideo.com/multimediav81",
+                        "argentina": "https://arclarovideo.akamaized.net/multimediav81",
+                        "uruguay": "https://uyclarovideo.akamaized.net/multimediav81",
+                        "paraguay": "https://pyclarovideo.akamaized.net/multimediav81",
+                        "chile": "https://clclarovideo.akamaized.net/multimediav81",
+                        "brasil": "https://brclarovideo.akamaized.net/multimediav81",
+                        "peru": "https://peuspdash.clarovideo.com/multimediav81",
+                        "panama": "https://pauspdash2.clarovideo.com/multimediav81",
+                        "costarica": "https://cruspdash.clarovideo.com/multimediav81",
+                        "colombia": "https://couspdash2.clarovideo.com/multimediav81",
+                        "ecuador": "https://ecuspdash.clarovideo.com/multimediav81",
+                        "guatemala": "https://gtuspdash.clarovideo.com/multimediav81",
+                        "dominicana": "https://douspdash.clarovideo.com/multimediav81",
+                        "elsalvador": "https://svuspdash.clarovideo.com/multimediav81",
+                        "nicaragua": "https://niuspdash.clarovideo.com/multimediav81",
+                        "honduras": "https://hnuspdash.clarovideo.com/multimediav81",
+                        "puertorico": "https://arclarovideo.akamaized.net/multimediav81",
+                        "demoeng": "http://prclarovideo.akamaized.net/multimediav81",
+                        "recordings_origin_harmonics": "https://{provider}-packager-{region}.clarovideo.net",
+                        "recordings_origin_capture": "https://captureclarovideo-vod.akamaized.net",
+                        "recordings_origin_nagra": "http://tstv.lcdn.claro.net.co",
+                        "recordings_origin_atemebppe": "https://pelivechannelsdash-lab.clarovideo.com",
+                        "recordings_origin_atemebpcl": "https://cllivechannelsdash-4.clarovideo.com",
+                        "recordings_origin_vos360ar": "https://arvoststvdash.clarovideo.com",
+                        "recordings_origin_vos360co": "https://covoststvdash.clarovideo.com",
+                        "recordings_origin_vos360cr": "https://crtstvdash.clarovideo.com",
+                        "recordings_origin_vos360sv": "https://svtstvdash.clarovideo.com",
+                        "recordings_origin_vos360gt": "https://gttstvdash.clarovideo.com",
+                        "recordings_origin_vos360hn": "https://hntstvdash.clarovideo.com",
+                        "recordings_origin_vos360ni": "https://nitstvdash.clarovideo.com",
+                        "recordings_origin_vos360pa": "https://pavoststvdash.clarovideo.com"
+                    },
+                    "video_endpoint_live": {
+                        "mexico": "https://mxuspdashqro.clarovideo.com/multimediav81",
+                        "argentina": "https://arclarovideo.akamaized.net/multimediav81",
+                        "uruguay": "https://uyclarovideo.akamaized.net/multimediav81",
+                        "paraguay": "https://pyclarovideo.akamaized.net/multimediav81",
+                        "chile": "https://clclarovideo.akamaized.net/multimediav81",
+                        "brasil": "https://brclarovideo.akamaized.net/multimediav81",
+                        "peru": "https://peuspdash.clarovideo.com/multimediav81",
+                        "panama": "https://pauspdash2.clarovideo.com/multimediav81",
+                        "costarica": "https://cruspdash.clarovideo.com/multimediav81",
+                        "colombia": "https://couspdash2.clarovideo.com/multimediav81",
+                        "ecuador": "https://ecuspdash.clarovideo.com/multimediav81",
+                        "guatemala": "https://gtuspdash.clarovideo.com/multimediav81",
+                        "dominicana": "https://douspdash.clarovideo.com/multimediav81",
+                        "elsalvador": "https://svuspdash.clarovideo.com/multimediav81",
+                        "nicaragua": "https://niuspdash.clarovideo.com/multimediav81",
+                        "honduras": "https://hnuspdash.clarovideo.com/multimediav81",
+                        "puertorico": "https://arclarovideo.akamaized.net/multimediav81",
+                        "demoeng": "http://prclarovideo.akamaized.net/multimediav81",
+                        "recordings_origin_harmonics": "http://{provider}-packager-{region}.clarovideo.net",
+                        "recordings_origin_capture": "https://captureclarovideo-vod.akamaized.net",
+                        "recordings_origin_nagra": "http://tstv.lcdn.claro.net.co",
+                        "recordings_origin_atemebppe": "https://pelivechannelsdash-lab.clarovideo.com",
+                        "recordings_origin_atemebpcl": "https://cllivechannelsdash-4.clarovideo.com",
+                        "recordings_origin_vos360ar": "https://arvoststvdash.clarovideo.com",
+                        "recordings_origin_vos360co": "https://covoststvdash.clarovideo.com",
+                        "recordings_origin_vos360cr": "https://crtstvdash.clarovideo.com",
+                        "recordings_origin_vos360sv": "https://svtstvdash.clarovideo.com",
+                        "recordings_origin_vos360gt": "https://gttstvdash.clarovideo.com",
+                        "recordings_origin_vos360hn": "https://hntstvdash.clarovideo.com",
+                        "recordings_origin_vos360ni": "https://nitstvdash.clarovideo.com",
+                        "recordings_origin_vos360pa": "https://pavoststvdash.clarovideo.com"
+                    }
+                },
+                "subtitles_endpoint": {
+                    "default": "https://subs.clarovideo.com/multimediav81",
+                    "mexico": "https://subs.clarovideo.com/multimediav81"
+                }
+            }
+        }
+    }
+}

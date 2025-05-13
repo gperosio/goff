@@ -28,33 +28,9 @@ func findKey(item *StoreItem, keys []string) any {
 	item.Mutex.Lock()
 	defer item.Mutex.Unlock()
 
-	if len(keys) == 0 {
-		return item.Value
-	}
+	val := recurseMap(item.Value, keys)
 
-	//fijo por niveles
-	if len(keys) == 1 {
-		if val, ok := item.Value[keys[0]]; ok {
-			return val
-		}
-		return nil
-	}
-
-	if len(keys) == 2 {
-		if val, ok := item.Value[keys[0]].(map[string]any)[keys[1]]; ok {
-			return val
-		}
-		return nil
-	}
-
-	if len(keys) == 3 {
-		if val, ok := item.Value[keys[0]].(map[string]any)[keys[1]].(map[string]any)[keys[2]]; ok {
-			return val
-		}
-		return nil
-	}
-
-	return nil
+	return val
 }
 
 func LoadFile(dbname string, tblname string) {
@@ -91,4 +67,26 @@ func LoadFile(dbname string, tblname string) {
 			}
 		}
 	}
+}
+
+func unshift(alist *[]string) string {
+	rv := (*alist)[0]
+	*alist = (*alist)[1:]
+	return rv
+}
+
+func recurseMap(data any, keys []string) any {
+	defer func() {
+		if err := recover(); err != nil {
+		}
+	}()
+	if len(keys) == 0 {
+		return data
+	}
+
+	if val, ok := data.(map[string]any)[keys[0]]; ok {
+		unshift(&keys)
+		return recurseMap(val, keys)
+	}
+	return nil
 }

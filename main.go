@@ -3,11 +3,16 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 )
+
+const MaxLineLenBytes = 2048
+const ReadWriteTimeout = time.Minute
 
 var banner = `
                 ________
@@ -34,7 +39,7 @@ func main() {
 	}
 
 	fmt.Print(banner)
-	fmt.Printf("Starting Goff server at %s\n", addr)
+	log.Printf("Starting Goff server at %s\n", addr)
 
 	CreateDS(getenv("STORAGE", "file"), getenv("ST_DB", "data"), getenv("ST_TBL", "features"))
 
@@ -51,11 +56,14 @@ func main() {
 	for {
 		conn, err := l.Accept()
 		if err != nil {
-			panic(err)
+			log.Printf("failed to accept conn: %v", err)
+			continue
 		}
+
 		go func(conn net.Conn) {
 			defer conn.Close()
 			buf := make([]byte, 2014) // store out stuff somewhere
+			_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
 
 			for {
 				len, err := conn.Read(buf)
@@ -76,6 +84,7 @@ func main() {
 					fmt.Printf("Error reading: %#v\n", err)
 					break
 				}
+				_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
 			}
 		}(conn)
 	}

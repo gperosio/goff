@@ -1,0 +1,67 @@
+{
+    "hc_argentina": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_chile": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_colombia": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_costarica": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_dominicana": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_ecuador": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_elsalvador": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_guatemala": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_honduras": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_nicaragua": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_panama": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_paraguay": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    },
+    "hc_peru": {
+        "version": 5.89,
+        "service": "payway/paymentservice/buyconfirm/api_version/v7.2",
+        "enabled": "hubfacturafijagate,hubgate"
+    }
+}
