@@ -102,3 +102,25 @@ func getIntArg(startPosition int, arr []byte) (*GetIntArgResult, error) {
 	result.Result = resultInt
 	return result, nil
 }
+
+func unshift(alist *[]string) string {
+	rv := (*alist)[0]
+	*alist = (*alist)[1:]
+	return rv
+}
+
+func recurseMap(data any, keys []string) any {
+	defer func() {
+		if err := recover(); err != nil {
+		}
+	}()
+	if len(keys) == 0 {
+		return data
+	}
+
+	if val, ok := data.(map[string]any)[keys[0]]; ok {
+		unshift(&keys)
+		return recurseMap(val, keys)
+	}
+	return nil
+}
