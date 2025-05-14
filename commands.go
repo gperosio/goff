@@ -35,6 +35,9 @@ func PerformGet(args []string) string {
 	//	store[args[0]] = nil
 	//	return nilBulkStringMsg()
 	//}
+	// Item exists - uso mutex en caso de que este presente Lock
+	item.Mutex.RLock()
+	defer item.Mutex.RUnlock()
 
 	return jsonMsg(item.Value)
 }
@@ -61,7 +64,11 @@ func PerformJsonGet(args []string) string {
 		return errorMsg("depth level is higher, max " + strconv.Itoa(MAX_LEVEL_RECURSION))
 	}
 
-	val := findKey(item, parts)
+	item.Mutex.RLock()
+	defer item.Mutex.RUnlock()
+
+	// val := findKey(item, parts)
+	val := recurseMap(item.Value, parts)
 	if val == nil {
 		return nilBulkStringMsg()
 	}

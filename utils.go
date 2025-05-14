@@ -42,7 +42,7 @@ func arrayMsg(lines []string) string {
 
 // stringMsg returns a formatted string message
 func stringMsg(msg string) string {
-	fmt.Println("+" + string(msg))
+	//fmt.Println("+" + string(msg))
 	return "+" + string(msg)
 }
 

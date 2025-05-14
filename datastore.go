@@ -12,7 +12,7 @@ import (
 type StoreItem struct {
 	Value            map[string]any
 	ModificationTime time.Time
-	Mutex            sync.Mutex
+	Mutex            sync.RWMutex
 }
 
 var store = make(map[string]*StoreItem)
@@ -21,16 +21,6 @@ func CreateDS(storage_type string, dbname string, tblname string) {
 	if storage_type == "file" {
 		LoadFile(dbname, tblname)
 	}
-}
-
-func findKey(item *StoreItem, keys []string) any {
-	// Item exists - enforce mutual exclusion on the expiry operation and retrieval
-	item.Mutex.Lock()
-	defer item.Mutex.Unlock()
-
-	val := recurseMap(item.Value, keys)
-
-	return val
 }
 
 func LoadFile(dbname string, tblname string) {
