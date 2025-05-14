@@ -146,13 +146,16 @@ func PerformJsonGet(args []string) string {
 		return stringMsg("OK")
 	}
 */
-func PerformScan(args []string) string {
+func PerformKeys(args []string) string {
 	var out []string
-	var c int = 0
+
+	//TODO: manejar patern
+	//if len(args) == 0 {
+	//	return errorMsg("no pattern provided to 'KEYS'")
+	//}
+
 	for k := range store {
 		out = append(out, k)
-		c++
 	}
-	out = append(out, strconv.Itoa(c))
 	return arrayMsg(out)
 }

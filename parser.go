@@ -102,8 +102,8 @@ func ParseCommand(command string, args []string) string {
 		return PerformGet(args)
 	case "HGET":
 		return PerformJsonGet(args)
-	case "SCAN":
-		return PerformScan(args)
+	case "KEYS":
+		return PerformKeys(args)
 	default:
 		return errorMsg(fmt.Sprintf("unknown command '%s'", cmd))
 	}
