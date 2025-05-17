@@ -63,7 +63,7 @@ func main() {
 		go func(conn net.Conn) {
 			defer conn.Close()
 			buf := make([]byte, 2014) // store out stuff somewhere
-			_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
+			//_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
 
 			for {
 				len, err := conn.Read(buf)
@@ -84,7 +84,7 @@ func main() {
 					fmt.Printf("Error reading: %#v\n", err)
 					break
 				}
-				_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
+				//_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
 			}
 		}(conn)
 	}
