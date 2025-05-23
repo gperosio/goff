@@ -1,0 +1,104 @@
+package server
+
+/*
+ * A tcp.Handler implements redis protocol
+ */
+
+import (
+	"context"
+	"io"
+	"net"
+	"strings"
+	"sync"
+
+	"github.com/clarovideo-argentina/goff/lib/logger"
+	"github.com/clarovideo-argentina/goff/lib/sync/atomic"
+	"github.com/clarovideo-argentina/goff/redis/connection"
+	"github.com/clarovideo-argentina/goff/redis/parser"
+	"github.com/clarovideo-argentina/goff/redis/protocol"
+	"github.com/clarovideo-argentina/goff/storage"
+)
+
+var (
+	unknownErrReplyBytes = []byte("-ERR unknown\r\n")
+)
+
+// Handler implements tcp.Handler and serves as a redis server
+type Handler struct {
+	activeConn sync.Map       // *client -> placeholder
+	closing    atomic.Boolean // refusing new client and new request
+	ds         *storage.DataStore
+}
+
+// MakeHandler creates a Handler instance
+func MakeHandler(datastore *storage.DataStore) *Handler {
+	return &Handler{ds: datastore}
+}
+
+func (h *Handler) closeClient(client *connection.Connection) {
+	_ = client.Close()
+	h.activeConn.Delete(client)
+}
+
+// Handle receives and executes redis commands
+func (h *Handler) Handle(ctx context.Context, conn net.Conn) {
+	if h.closing.Get() {
+		// closing handler refuse new connection
+		_ = conn.Close()
+		return
+	}
+
+	client := connection.NewConn(conn)
+	h.activeConn.Store(client, struct{}{})
+
+	ch := parser.ParseStream(conn)
+	for payload := range ch {
+		if payload.Err != nil {
+			if payload.Err == io.EOF ||
+				payload.Err == io.ErrUnexpectedEOF ||
+				strings.Contains(payload.Err.Error(), "use of closed network connection") {
+				// connection closed
+				h.closeClient(client)
+				logger.Info("connection closed: " + client.RemoteAddr())
+				return
+			}
+			// protocol err
+			errReply := protocol.MakeErrReply(payload.Err.Error())
+			_, err := client.Write(errReply.ToBytes())
+			if err != nil {
+				h.closeClient(client)
+				logger.Info("connection closed: " + client.RemoteAddr())
+				return
+			}
+			continue
+		}
+		if payload.Data == nil {
+			logger.Error("empty payload")
+			continue
+		}
+		r, ok := payload.Data.(*protocol.MultiBulkReply)
+		if !ok {
+			logger.Error("require multi bulk protocol")
+			continue
+		}
+		result := h.ds.Exec(client, r.Args)
+		if result != nil {
+			_, _ = client.Write(result.ToBytes())
+		} else {
+			_, _ = client.Write(unknownErrReplyBytes)
+		}
+	}
+}
+
+// Close stops handler
+func (h *Handler) Close() error {
+	logger.Info("handler shutting down...")
+	h.closing.Set(true)
+	// TODO: concurrent wait
+	h.activeConn.Range(func(key interface{}, val interface{}) bool {
+		client := key.(*connection.Connection)
+		_ = client.Close()
+		return true
+	})
+	return nil
+}

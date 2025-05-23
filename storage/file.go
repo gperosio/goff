@@ -1,29 +1,18 @@
-package main
+package storage
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"strings"
-	"sync"
-	"time"
+
+	"github.com/clarovideo-argentina/goff/interface/redis"
 )
 
-type StoreItem struct {
-	Value            map[string]any
-	ModificationTime time.Time
-	Mutex            sync.RWMutex
-}
+func (s *DataStore) Load(dbname string, tblname string) {
+	s.Items = make(map[string]StoreItem)
 
-var store = make(map[string]*StoreItem)
-
-func CreateDS(storage_type string, dbname string, tblname string) {
-	if storage_type == "file" {
-		LoadFile(dbname, tblname)
-	}
-}
-
-func LoadFile(dbname string, tblname string) {
 	dot := "."
 	basepath := dbname + "/" + tblname
 
@@ -50,11 +39,20 @@ func LoadFile(dbname string, tblname string) {
 			if err == nil {
 				//parsear json
 				if err := json.Unmarshal(src, &val); err == nil {
-					store[name] = &StoreItem{
+					s.Items[name] = StoreItem{
 						Value: val,
 					}
 				}
 			}
 		}
 	}
+}
+
+func (s *DataStore) Exec(c redis.Connection, cmdLine [][]byte) redis.Reply {
+	for _, v := range cmdLine {
+		fmt.Println(string(v[:]))
+	}
+	cmd := strings.ToUpper(string(cmdLine[0][:]))
+	var r redis.Reply
+	return r
 }

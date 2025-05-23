@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"log"
-	"net"
 	"os"
 	"time"
 
+	"github.com/clarovideo-argentina/goff/config"
+	"github.com/clarovideo-argentina/goff/lib/logger"
+	RedisServer "github.com/clarovideo-argentina/goff/redis/server"
+	"github.com/clarovideo-argentina/goff/storage"
+	"github.com/clarovideo-argentina/goff/tcp"
 	"github.com/joho/godotenv"
 )
 
@@ -25,24 +27,25 @@ var banner = `
 `
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
+	if err := godotenv.Load(".env"); err != nil {
 		fmt.Println("Error loading .env file")
 		os.Exit(1)
 	}
 
-	addr := "0.0.0.0:" + getenv("PORT", "6382")
-	l, err := net.Listen("tcp", addr)
-	if err != nil {
-		fmt.Printf("Failed to bind to %s\n", addr)
-		os.Exit(1)
-	}
+	logger.Setup(&logger.Settings{
+		Path:       "logs",
+		Name:       "godis",
+		Ext:        "log",
+		TimeFormat: "2006-01-02",
+	})
+
+	config.SetupConfig()
 
 	fmt.Print(banner)
-	log.Printf("Starting Goff server at %s\n", addr)
+	//logger.Info(fmt.Sprintf("Starting Goff server at %s:%d", config.Properties.Bind, config.Properties.Port))
 
-	CreateDS(getenv("STORAGE", "file"), getenv("ST_DB", "data"), getenv("ST_TBL", "features"))
-
+	//hacer que devuelva un puntero para pasarselo a la gorutina de revision y al servicio TCP
+	ds := storage.CreateDS(config.Properties.Storage, config.Properties.Database, config.Properties.Table)
 	/*
 		go func() {
 			for {
@@ -52,40 +55,9 @@ func main() {
 			}
 		}()
 	*/
-	// Listen for inputs and respond
-	for {
-		conn, err := l.Accept()
-		if err != nil {
-			log.Printf("failed to accept conn: %v", err)
-			continue
-		}
-
-		go func(conn net.Conn) {
-			defer conn.Close()
-			buf := make([]byte, 2014) // store out stuff somewhere
-			//_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
-
-			for {
-				len, err := conn.Read(buf)
-				if err != nil {
-					if err != io.EOF {
-						fmt.Printf("Error reading: %#v\n", err)
-					}
-					break
-				}
-
-				// Parse the command out
-				command := buf[:len]
-				response := Parse(command)
-
-				// Write the response back to the connection
-				_, responseErr := conn.Write([]byte(response + "\r\n"))
-				if responseErr != nil {
-					fmt.Printf("Error reading: %#v\n", err)
-					break
-				}
-				//_ = conn.SetReadDeadline(time.Now().Add(ReadWriteTimeout))
-			}
-		}(conn)
+	if err := tcp.ListenAndServeWithSignal(&tcp.Config{
+		Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
+	}, RedisServer.MakeHandler(ds)); err != nil {
+		logger.Error(err)
 	}
 }
