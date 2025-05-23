@@ -12,11 +12,13 @@ type StoreItem struct {
 }
 
 type DataStore struct {
-	Items map[string]StoreItem
+	Items map[string]*StoreItem
 }
 
+var store = make(map[string]*StoreItem)
+
 func CreateDS(storage_type string, dbname string, tblname string) *DataStore {
-	ds := DataStore{Items: make(map[string]StoreItem)}
+	ds := DataStore{Items: store}
 	ds.Load(dbname, tblname)
 	return &ds
 }
