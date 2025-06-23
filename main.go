@@ -42,19 +42,9 @@ func main() {
 	config.SetupConfig()
 
 	fmt.Print(banner)
-	//logger.Info(fmt.Sprintf("Starting Goff server at %s:%d", config.Properties.Bind, config.Properties.Port))
 
-	//hacer que devuelva un puntero para pasarselo a la gorutina de revision y al servicio TCP
 	ds := storage.CreateDS(config.Properties.Storage, config.Properties.Database, config.Properties.Table)
-	/*
-		go func() {
-			for {
-				//leer mayor a fecha_ultima sino todo
-				// si resultado, hacer cambio
-				//actualizar fecha ultima
-			}
-		}()
-	*/
+
 	if err := tcp.ListenAndServeWithSignal(&tcp.Config{
 		Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
 	}, RedisServer.MakeHandler(ds)); err != nil {

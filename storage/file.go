@@ -38,10 +38,12 @@ func (s *DataStore) Load(dbname string, tblname string) {
 			var val map[string]any
 			src, err := os.ReadFile(f)
 			if err == nil {
+				fileInfo, _ := os.Stat(f)
 				//parsear json
 				if err := json.Unmarshal(src, &val); err == nil {
 					s.Items[name] = &StoreItem{
-						Value: val,
+						Value:            val,
+						ModificationTime: fileInfo.ModTime(),
 					}
 				}
 			}
