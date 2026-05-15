@@ -5,11 +5,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/clarovideo-argentina/goff/config"
-	"github.com/clarovideo-argentina/goff/lib/logger"
-	RedisServer "github.com/clarovideo-argentina/goff/redis/server"
-	"github.com/clarovideo-argentina/goff/storage"
-	"github.com/clarovideo-argentina/goff/tcp"
+	"github.com/gperosio/goff/config"
+	"github.com/gperosio/goff/lib/logger"
+	RedisServer "github.com/gperosio/goff/redis/server"
+	"github.com/gperosio/goff/storage"
+	"github.com/gperosio/goff/tcp"
 	"github.com/joho/godotenv"
 )
 
@@ -43,11 +43,16 @@ func main() {
 
 	fmt.Print(banner)
 
-	ds := storage.CreateDS(config.Properties.Storage, config.Properties.Database, config.Properties.Table)
+	if ds, err := storage.CreateDS(config.StorageProps); err == nil {
 
-	if err := tcp.ListenAndServeWithSignal(&tcp.Config{
-		Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
-	}, RedisServer.MakeHandler(ds)); err != nil {
-		logger.Error(err)
+		storage.DatastoreSynchronizer(ds, config.StorageProps.CheckTime)
+
+		if err := tcp.ListenAndServeWithSignal(&tcp.Config{
+			Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
+		}, RedisServer.MakeHandler(ds)); err != nil {
+			logger.Error(err)
+		}
+	} else {
+		logger.Fatal(err)
 	}
 }

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/clarovideo-argentina/goff/interface/redis"
+	"github.com/gperosio/goff/interface/redis"
 )
 
 var (

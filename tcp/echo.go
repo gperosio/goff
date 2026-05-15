@@ -12,9 +12,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/clarovideo-argentina/goff/lib/logger"
-	"github.com/clarovideo-argentina/goff/lib/sync/atomic"
-	"github.com/clarovideo-argentina/goff/lib/sync/wait"
+	"github.com/gperosio/goff/lib/logger"
+	"github.com/gperosio/goff/lib/sync/atomic"
+	"github.com/gperosio/goff/lib/sync/wait"
 )
 
 // EchoHandler echos received line to client, using for test

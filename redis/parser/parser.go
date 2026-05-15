@@ -8,9 +8,9 @@ import (
 	"runtime/debug"
 	"strconv"
 
-	"github.com/clarovideo-argentina/goff/interface/redis"
-	"github.com/clarovideo-argentina/goff/lib/logger"
-	"github.com/clarovideo-argentina/goff/redis/protocol"
+	"github.com/gperosio/goff/interface/redis"
+	"github.com/gperosio/goff/lib/logger"
+	"github.com/gperosio/goff/redis/protocol"
 )
 
 // Payload stores redis.Reply or error
