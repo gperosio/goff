@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/clarovideo-argentina/goff/interface/redis"
+	"github.com/gperosio/goff/interface/redis"
 )
 
 // CmdLine is alias for [][]byte, represents a command line

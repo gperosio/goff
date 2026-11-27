@@ -11,12 +11,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/clarovideo-argentina/goff/lib/logger"
-	"github.com/clarovideo-argentina/goff/lib/sync/atomic"
-	"github.com/clarovideo-argentina/goff/redis/connection"
-	"github.com/clarovideo-argentina/goff/redis/parser"
-	"github.com/clarovideo-argentina/goff/redis/protocol"
-	"github.com/clarovideo-argentina/goff/storage"
+	"github.com/gperosio/goff/lib/logger"
+	"github.com/gperosio/goff/lib/sync/atomic"
+	"github.com/gperosio/goff/redis/connection"
+	"github.com/gperosio/goff/redis/parser"
+	"github.com/gperosio/goff/redis/protocol"
+	"github.com/gperosio/goff/storage"
 )
 
 var (

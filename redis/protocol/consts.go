@@ -3,7 +3,7 @@ package protocol
 import (
 	"bytes"
 
-	"github.com/clarovideo-argentina/goff/interface/redis"
+	"github.com/gperosio/goff/interface/redis"
 )
 
 // PongReply is +PONG

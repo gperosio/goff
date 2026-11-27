@@ -15,8 +15,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/clarovideo-argentina/goff/interface/tcp"
-	"github.com/clarovideo-argentina/goff/lib/logger"
+	"github.com/gperosio/goff/interface/tcp"
+	"github.com/gperosio/goff/lib/logger"
 )
 
 // Config stores tcp server properties

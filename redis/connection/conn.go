@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/clarovideo-argentina/goff/lib/logger"
-	"github.com/clarovideo-argentina/goff/lib/sync/wait"
+	"github.com/gperosio/goff/lib/logger"
+	"github.com/gperosio/goff/lib/sync/wait"
 )
 
 // Connection represents a connection with a redis-cli

@@ -5,7 +5,7 @@ import (
 	"io"
 	"sync"
 
-	"github.com/clarovideo-argentina/goff/lib/logger"
+	"github.com/gperosio/goff/lib/logger"
 )
 
 // FakeConn implements redis.Connection for test
