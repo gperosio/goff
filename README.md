@@ -1,8 +1,9 @@
-# GOFF
+# GoFF
 
 ## Resumen
 
-Una implementacion del servicio de Redis (esta implementacion https://github.com/HDT3213/godis/) para poder acceder a valores de configuracion, feature flags u otro valor que tenga formato JSON, y donde la actualizacion de los mismo es minima
+Servicio de Feature Flag, que implementa el protocolo de Redis (tomado de https://github.com/HDT3213/godis/) escrito en Go.
+Se puede utilizar para acceder a valores de configuracion del backend, opciones para dispositivos clientes, o cualquier tipo de esquema que tenga formato JSON, y donde la actualizacion de los datos es minima.
 
 ## Comandos implementados
 - `PING`
@@ -12,7 +13,7 @@ Una implementacion del servicio de Redis (esta implementacion https://github.com
 
 ## Dependencias
 
-- Go 1.23 or higher
+- Go 1.26 or higher
 
 ## Correr el servidor
 En desarrollo: 
@@ -31,12 +32,12 @@ Ejemplos de uso
 
 ### GET
 
-```bash
-GET codigo_de_error_por_region
+```
+127.0.0.1:6382> GET 5060292302201
 ```
 
 ### HGET
 
-```bash
-HGET 531eed34tvfy7b73a818a234 access_select_country
+```
+127.0.0.1:6382> HGET 5060292302201 products.categories_old
 ```

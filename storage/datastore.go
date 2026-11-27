@@ -22,11 +22,11 @@ type StoreItem struct {
 
 type DataStore struct {
 	Items        map[string]*StoreItem
-	Source       DataproviderSource
+	Source       Dataprovider
 	MaxModifTime time.Time
 }
 
-type DataproviderSource interface {
+type Dataprovider interface {
 	Init() error
 	Load(items map[string]*StoreItem, maxModifTime time.Time) (time.Time, error)
 	Close()
@@ -56,7 +56,7 @@ func CreateDS(sp *config.StorageProperties) (*DataStore, error) {
 	return ds, nil
 }
 
-func DatastoreSynchronizer(ds *DataStore, interval time.Duration) {
+func CheckSource(ds *DataStore, interval time.Duration) {
 	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 

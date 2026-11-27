@@ -45,7 +45,7 @@ func main() {
 
 	if ds, err := storage.CreateDS(config.StorageProps); err == nil {
 
-		storage.DatastoreSynchronizer(ds, config.StorageProps.CheckTime)
+		storage.CheckSource(ds, config.StorageProps.CheckTime)
 
 		if err := tcp.ListenAndServeWithSignal(&tcp.Config{
 			Address: fmt.Sprintf("%s:%d", config.Properties.Bind, config.Properties.Port),
